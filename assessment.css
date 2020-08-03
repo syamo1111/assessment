@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+.content {
+  width: 500px;
+  padding: 10px 20px;
+  margin: 0 auto;
+  background-color: #04a6eb;
+  color: #fdffff;
+}
+
+#user-name {
+    height: 20px;
+}
+
+#assessment {
+  padding: 5px 20px;
+  background-color: #337ab7;
+  color: #fdffff;
+  border-style: none;
+  cursor: pointer;
+}
+
+#result-area span {
+  color: #00ff30;
+}
