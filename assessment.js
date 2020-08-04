@@ -29,7 +29,7 @@ assessmentButton.onclick = () => {
   
   const paragraph = document.createElement('p');
   const result = assessment(userName);
-  paragraph.innerHTML = result;
+  paragraph.innerHTML = result.display;
   resultDivided.appendChild(paragraph);
   
   // ツイートエリアの作成
@@ -38,7 +38,7 @@ assessmentButton.onclick = () => {
   const hrefValue = 'https://twitter.com/intent/tweet?button_hashtag=' + encodeURIComponent('あなたのいいところ') + '&ref_src=twsrc%5Etfw';
   anchor.setAttribute('href', hrefValue);
   anchor.className = 'twitter-hashtag-button';
-  anchor.setAttribute('data-text', result);
+  anchor.setAttribute('data-text', result.tweet);
   anchor.innerText = 'Tweet #あなたのいいところ';
   tweetDivided.appendChild(anchor);
   
@@ -73,11 +73,13 @@ const answers = [
   '{userName}のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる{userName}が皆から評価されています。'
 ];
 
-/*
-名前の文字列を渡すと診断結果を返す関数
-@param {string} userName ユーザーの名前
-@return {string} 診断結果
-*/
+/**
+ * 名前の文字列を渡すと診断結果を返す関数
+ * @param {string} userName ユーザーの名前
+ * @return {Obgect} result オブジェクトが戻る
+ * @return {string} result.display - 画面に表示用の結果
+ * @return {string} result.tweet - ツイート内容用の結果
+ */
 function assessment(userName) {
   // 全文字のコード番号を取得してそれを足し合わせる
   let sumOfCharCode = 0;
@@ -87,9 +89,14 @@ function assessment(userName) {
   
   // 文字のコード番号の合計を回答の数で割って添字の数値を求める
   const index = sumOfCharCode % answers.length;
-  let result = answers[index];
+  let resultOnce = answers[index];
   
-  result = result.replace(/{userName\}/g, '<span>' + userName + '</span>');
+  let result = {
+    display :
+      resultOnce.replace(/{userName\}/g, '<span>' + userName + '</span>'),
+    tweet :
+      resultOnce.replace(/{userName\}/g, userName)
+  };
   return result;
 }
 
