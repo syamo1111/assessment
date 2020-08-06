@@ -104,12 +104,12 @@ function assessment(userName) {
 
 //テストコード
 console.assert(
-  assessment('太朗') ===
-    '太朗のいいところはまなざしです。太朗に見つめられた人は、気になって仕方がないでしょう。',
+  assessment('太郎').tweet ===
+    '太郎のいいところはユニークさです。太郎だけのその特徴が皆を楽しくさせます。',
   '診断結果の文言の特定の部分を名前に置き換える処理が正しくありません。'
 );
 
 console.assert(
-  assessment('太朗') === assessment('太朗'),
+  assessment('太朗').tweet === assessment('太朗').tweet,
   '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
 )
